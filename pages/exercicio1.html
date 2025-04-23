@@ -2,217 +2,233 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Quiz Flexbox - Identificar, Reconhecer, Avaliar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Flexbox</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f0f4f8;
+      background-color: #f4f4f4;
       padding: 2rem;
-    }
-    .quiz-container {
-      max-width: 800px;
-      margin: auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2 {
       color: #333;
     }
+    .quiz-container {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 700px;
+      margin: 0 auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+    }
     .question {
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
-    .question p {
-      font-weight: bold;
-    }
-    .answers label {
+    .options button {
       display: block;
-      margin: 0.5rem 0;
-      cursor: pointer;
-    }
-    button {
-      background: #007BFF;
-      color: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 5px;
+      width: 100%;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
       font-size: 1rem;
       cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #eee;
+    }
+    #feedback {
       margin-top: 1rem;
+      padding: 1rem;
+      background-color: #fafafa;
+      border-left: 4px solid #888;
     }
-    button:hover {
-      background: #0056b3;
-    }
-    .result {
-      margin-top: 2rem;
-      font-size: 1.2rem;
-      font-weight: bold;
+    #proxima {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      display: none;
     }
     pre {
-        background-color: #f5f5f5;
-        padding: 0.75rem;
-        border-radius: 5px;
-        overflow-x: auto;
-        font-family: "Courier New", monospace;
-        font-size: 0.95rem;
-        margin-top: 0.5rem;
-      }
-    
-      .question p code {
-        background-color: #eee;
-        padding: 2px 4px;
-        border-radius: 4px;
-        font-family: monospace;
-      }
+      background-color: #f0f0f0;
+      padding: 0.75rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
   </style>
 </head>
 <body>
   <div class="quiz-container">
-    <h2>Quiz: Flexbox (Container e Itens Flexíveis)</h2>
-    <form id="quizForm">
-      <!-- Questões aqui -->
-    </form>
-    <button onclick="verificarRespostas()">Enviar</button>
-    <div class="result" id="resultado"></div>
+    <h1>Quiz: Flexbox</h1>
+    <div id="quiz"></div>
+    <div id="feedback"></div>
+    <button id="proxima" onclick="proximaPergunta()">Próxima</button>
   </div>
 
   <script>
     const perguntas = [
+      // Identificar
       {
-        texto: "1. Qual das propriedades a seguir transforma um elemento em um container flexível?",
-        opcoes: ["align-items", "flex-direction", "display: flex", "justify-content"],
-        correta: 2
-      },
-      {
-        texto: "2. Em um contexto de Flexbox, o que é considerado um item flexível?",
+        texto: "1. Qual propriedade define um container como flexível?",
         opcoes: [
-          "Qualquer elemento <div> em uma página",
-          "Qualquer filho direto de um container com display: flex",
-          "Qualquer elemento com propriedade float",
-          "Apenas os elementos com position: relative"
+          "position: flex;",
+          "display: flex;",
+          "flex-direction: row;",
+          "justify-content: flex-start;"
         ],
-        correta: 1
+        correta: 1,
+        justificativa: "A propriedade correta é 'display: flex;'. Ela transforma o elemento em um container flexível."
       },
       {
-        texto: "3. O que a propriedade flex-direction: column altera em um container flex?",
+        texto: "2. Qual propriedade controla o espaçamento entre os itens em um container flexível?",
         opcoes: [
-          "Alinha os itens na diagonal",
-          "Coloca os itens um abaixo do outro, verticalmente",
-          "Centraliza os itens na tela",
-          "Remove o comportamento flexível dos itens"
+          "align-items",
+          "margin",
+          "justify-content",
+          "flex-wrap"
         ],
-        correta: 1
+        correta: 2,
+        justificativa: "'justify-content' define o alinhamento dos itens ao longo do eixo principal, controlando o espaçamento entre eles."
       },
+
+      // Reconhecer
       {
-        texto: "4. Qual é o efeito de aplicar justify-content: space-between em um container flex?",
+        texto: `3. Dado o CSS:
+<pre><code>display: flex;
+flex-direction: column;</code></pre>
+Qual será a direção principal do eixo?`,
         opcoes: [
-          "Todos os itens se alinham no canto direito",
-          "Os itens ficam colados uns nos outros",
-          "Os itens são distribuídos com espaços iguais entre eles",
-          "Os itens são centralizados horizontalmente"
+          "Horizontal da esquerda para a direita",
+          "Vertical de cima para baixo",
+          "Horizontal da direita para a esquerda",
+          "Vertical de baixo para cima"
         ],
-        correta: 2
+        correta: 1,
+        justificativa: "Com 'flex-direction: column;', o eixo principal passa a ser vertical, de cima para baixo."
       },
       {
-        texto: "5. A propriedade align-items: center é usada para:",
+        texto: "4. O que faz a propriedade 'align-items: center;' em um container flex?",
         opcoes: [
-          "Centralizar os itens na horizontal",
-          "Centralizar os itens na vertical dentro do container flex",
-          "Aumentar a largura dos itens",
-          "Distribuir os itens igualmente em todas as direções"
+          "Alinha os itens ao centro do eixo principal",
+          "Alinha os itens ao centro do eixo cruzado",
+          "Centraliza o texto dos itens",
+          "Nada, pois é uma propriedade de item, não de container"
         ],
-        correta: 1
+        correta: 1,
+        justificativa: "'align-items: center;' centraliza os itens ao longo do eixo cruzado (perpendicular ao principal)."
       },
       {
-        texto: "6. Ao aplicar flex-wrap: wrap, o que acontece com os itens que não cabem na linha?",
+        texto: "5. Qual valor da propriedade 'flex-wrap' permite que os itens quebrem linha?",
         opcoes: [
-          "Eles são escondidos",
-          "Eles são reduzidos de tamanho",
-          "Eles pulam para a próxima linha",
-          "Eles saem da tela"
+          "nowrap",
+          "wrap",
+          "break",
+          "auto"
         ],
-        correta: 2
+        correta: 1,
+        justificativa: "O valor 'wrap' permite que os itens sejam distribuídos em múltiplas linhas, caso não caibam em uma só."
       },
       {
-        texto: "7. Qual das alternativas abaixo é um valor válido para a propriedade align-self de um item flexível?",
-        opcoes: ["wrap-around", "center", "start-end", "inline"],
-        correta: 1
-      },
-      {
-        texto: "8. A propriedade order aplicada a um item flex serve para:",
+        texto: "6. O que 'flex: 1;' faz em um item flexível?",
         opcoes: [
-          "Mudar a direção do container",
-          "Alinhar o item no centro",
-          "Definir a sequência de exibição dos itens",
-          "Definir se o item será visível"
+          "Define margem de 1px",
+          "Faz o item ocupar todo o espaço disponível",
+          "Centraliza o item",
+          "Define a ordem do item"
         ],
-        correta: 2
+        correta: 1,
+        justificativa: "'flex: 1;' indica que o item pode crescer para ocupar espaço restante proporcionalmente."
       },
       {
-        texto: `9. Dado o seguinte trecho de código CSS:
-<pre>
-<code>
-display: flex;
-justify-content: center;
-align-items: center;
-</code>
-</pre>
-            Qual é a principal vantagem dessa configuração?`,
-    opcoes: [
-      "Ocupa menos memória do navegador",
-      "Permite o uso de animações",
-      "Facilita o posicionamento central de conteúdo",
-      "Melhora o desempenho de carregamento"
-    ],
-    correta: 2
-      },
-      {
-        texto: "10. Suponha que um layout esteja com os itens todos espremidos no canto esquerdo, mesmo usando display: flex. Qual das seguintes ações provavelmente resolveria o problema?",
+        texto: "7. Qual propriedade define a ordem de exibição dos itens dentro de um flex container?",
         opcoes: [
-          "Substituir display: flex por display: inline",
-          "Adicionar justify-content: space-around no container",
-          "Definir flex-direction: column-reverse",
-          "Aplicar order: -1 em todos os itens"
+          "order",
+          "flex-grow",
+          "z-index",
+          "justify-content"
         ],
-        correta: 1
+        correta: 0,
+        justificativa: "A propriedade 'order' permite alterar a ordem de renderização dos itens em um container flexível."
       },
+      {
+        texto: "8. Quando se usa 'flex-direction: row-reverse;', qual é o comportamento?",
+        opcoes: [
+          "Os itens são alinhados verticalmente do fim para o início",
+          "Os itens são alinhados horizontalmente da direita para a esquerda",
+          "Os itens são centralizados no eixo cruzado",
+          "Os itens são ignorados pelo flexbox"
+        ],
+        correta: 1,
+        justificativa: "'row-reverse' inverte a direção do eixo principal, alinhando os itens da direita para a esquerda."
+      },
+
+      // Avaliar
+      {
+        texto: "9. Um layout possui vários itens de tamanhos diferentes que precisam se alinhar uniformemente na vertical. Qual propriedade deve ser aplicada no container para isso?",
+        opcoes: [
+          "align-content",
+          "justify-content",
+          "align-items",
+          "flex-direction"
+        ],
+        correta: 2,
+        justificativa: "'align-items' no container define como os itens se alinham verticalmente no eixo cruzado."
+      },
+      {
+        texto: "10. Um desenvolvedor quer garantir que o primeiro item de um flex container apareça por último na visualização. Qual abordagem é mais apropriada?",
+        opcoes: [
+          "Aplicar 'order: 1;' ao primeiro item",
+          "Aplicar 'flex: 1;' ao último item",
+          "Usar 'flex-wrap: wrap-reverse;'",
+          "Aplicar 'align-self: flex-end;' ao primeiro item"
+        ],
+        correta: 0,
+        justificativa: "Alterar o valor de 'order' é a forma mais adequada de mudar a ordem visual dos itens no flexbox."
+      }
     ];
 
-    const form = document.getElementById('quizForm');
+    let perguntaAtual = 0;
 
-    perguntas.forEach((pergunta, index) => {
-      const div = document.createElement('div');
-      div.classList.add('question');
-      div.innerHTML = `<p>${pergunta.texto}</p>`;
-      pergunta.opcoes.forEach((opcao, i) => {
-        div.innerHTML += `
-          <div class="answers">
-            <label>
-              <input type="radio" name="q${index}" value="${i}" required />
-              ${opcao}
-            </label>
-          </div>
-        `;
-      });
-      form.appendChild(div);
-    });
+    function mostrarPergunta() {
+      const quiz = document.getElementById("quiz");
+      const pergunta = perguntas[perguntaAtual];
 
-    function verificarRespostas() {
-      const formData = new FormData(form);
-      let acertos = 0;
+      quiz.innerHTML = `<div class="question">
+        <p>${pergunta.texto}</p>
+        <div class="options">
+          ${pergunta.opcoes.map((op, i) => `<button onclick="verificarResposta(${perguntaAtual}, ${i})">${op}</button>`).join('')}
+        </div>
+      </div>`;
 
-      perguntas.forEach((pergunta, index) => {
-        if (parseInt(formData.get(`q${index}`)) === pergunta.correta) {
-          acertos++;
-        }
-      });
-
-      const resultado = document.getElementById('resultado');
-      resultado.innerText = `Você acertou ${acertos} de ${perguntas.length} questões.`;
-      resultado.style.color = acertos >= 7 ? 'green' : 'red';
+      document.getElementById("feedback").innerHTML = "";
+      document.getElementById("proxima").style.display = "none";
     }
+
+    function verificarResposta(index, opcaoSelecionada) {
+      const pergunta = perguntas[index];
+      const correta = pergunta.correta;
+      const feedback = document.getElementById("feedback");
+
+      if (opcaoSelecionada === correta) {
+        feedback.innerHTML = `<p style='color: green;'>✅ Resposta correta!</p><p>${pergunta.justificativa}</p>`;
+      } else {
+        feedback.innerHTML = `<p style='color: red;'>❌ Resposta incorreta.</p><p>${pergunta.justificativa}</p>`;
+      }
+
+      document.getElementById("proxima").style.display = "inline-block";
+    }
+
+    function proximaPergunta() {
+      perguntaAtual++;
+      if (perguntaAtual < perguntas.length) {
+        mostrarPergunta();
+      } else {
+        document.getElementById("quiz").innerHTML = "<p><strong>Você concluiu o quiz!</strong></p>";
+        document.getElementById("feedback").innerHTML = "";
+        document.getElementById("proxima").style.display = "none";
+      }
+    }
+
+    window.onload = mostrarPergunta;
   </script>
 </body>
 </html>
