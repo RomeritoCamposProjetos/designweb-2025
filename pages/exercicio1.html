@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz Flexbox - Identificar, Reconhecer, Avaliar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      padding: 2rem;
+    }
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #333;
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    .answers label {
+      display: block;
+      margin: 0.5rem 0;
+      cursor: pointer;
+    }
+    button {
+      background: #007BFF;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .result {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    pre {
+        background-color: #f5f5f5;
+        padding: 0.75rem;
+        border-radius: 5px;
+        overflow-x: auto;
+        font-family: "Courier New", monospace;
+        font-size: 0.95rem;
+        margin-top: 0.5rem;
+      }
+    
+      .question p code {
+        background-color: #eee;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-family: monospace;
+      }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2>Quiz: Flexbox (Container e Itens Flexíveis)</h2>
+    <form id="quizForm">
+      <!-- Questões aqui -->
+    </form>
+    <button onclick="verificarRespostas()">Enviar</button>
+    <div class="result" id="resultado"></div>
+  </div>
+
+  <script>
+    const perguntas = [
+      {
+        texto: "1. Qual das propriedades a seguir transforma um elemento em um container flexível?",
+        opcoes: ["align-items", "flex-direction", "display: flex", "justify-content"],
+        correta: 2
+      },
+      {
+        texto: "2. Em um contexto de Flexbox, o que é considerado um item flexível?",
+        opcoes: [
+          "Qualquer elemento <div> em uma página",
+          "Qualquer filho direto de um container com display: flex",
+          "Qualquer elemento com propriedade float",
+          "Apenas os elementos com position: relative"
+        ],
+        correta: 1
+      },
+      {
+        texto: "3. O que a propriedade flex-direction: column altera em um container flex?",
+        opcoes: [
+          "Alinha os itens na diagonal",
+          "Coloca os itens um abaixo do outro, verticalmente",
+          "Centraliza os itens na tela",
+          "Remove o comportamento flexível dos itens"
+        ],
+        correta: 1
+      },
+      {
+        texto: "4. Qual é o efeito de aplicar justify-content: space-between em um container flex?",
+        opcoes: [
+          "Todos os itens se alinham no canto direito",
+          "Os itens ficam colados uns nos outros",
+          "Os itens são distribuídos com espaços iguais entre eles",
+          "Os itens são centralizados horizontalmente"
+        ],
+        correta: 2
+      },
+      {
+        texto: "5. A propriedade align-items: center é usada para:",
+        opcoes: [
+          "Centralizar os itens na horizontal",
+          "Centralizar os itens na vertical dentro do container flex",
+          "Aumentar a largura dos itens",
+          "Distribuir os itens igualmente em todas as direções"
+        ],
+        correta: 1
+      },
+      {
+        texto: "6. Ao aplicar flex-wrap: wrap, o que acontece com os itens que não cabem na linha?",
+        opcoes: [
+          "Eles são escondidos",
+          "Eles são reduzidos de tamanho",
+          "Eles pulam para a próxima linha",
+          "Eles saem da tela"
+        ],
+        correta: 2
+      },
+      {
+        texto: "7. Qual das alternativas abaixo é um valor válido para a propriedade align-self de um item flexível?",
+        opcoes: ["wrap-around", "center", "start-end", "inline"],
+        correta: 1
+      },
+      {
+        texto: "8. A propriedade order aplicada a um item flex serve para:",
+        opcoes: [
+          "Mudar a direção do container",
+          "Alinhar o item no centro",
+          "Definir a sequência de exibição dos itens",
+          "Definir se o item será visível"
+        ],
+        correta: 2
+      },
+      {
+        texto: `9. Dado o seguinte trecho de código CSS:
+<pre>
+<code>
+display: flex;
+justify-content: center;
+align-items: center;
+</code>
+</pre>
+            Qual é a principal vantagem dessa configuração?`,
+    opcoes: [
+      "Ocupa menos memória do navegador",
+      "Permite o uso de animações",
+      "Facilita o posicionamento central de conteúdo",
+      "Melhora o desempenho de carregamento"
+    ],
+    correta: 2
+      },
+      {
+        texto: "10. Suponha que um layout esteja com os itens todos espremidos no canto esquerdo, mesmo usando display: flex. Qual das seguintes ações provavelmente resolveria o problema?",
+        opcoes: [
+          "Substituir display: flex por display: inline",
+          "Adicionar justify-content: space-around no container",
+          "Definir flex-direction: column-reverse",
+          "Aplicar order: -1 em todos os itens"
+        ],
+        correta: 1
+      },
+    ];
+
+    const form = document.getElementById('quizForm');
+
+    perguntas.forEach((pergunta, index) => {
+      const div = document.createElement('div');
+      div.classList.add('question');
+      div.innerHTML = `<p>${pergunta.texto}</p>`;
+      pergunta.opcoes.forEach((opcao, i) => {
+        div.innerHTML += `
+          <div class="answers">
+            <label>
+              <input type="radio" name="q${index}" value="${i}" required />
+              ${opcao}
+            </label>
+          </div>
+        `;
+      });
+      form.appendChild(div);
+    });
+
+    function verificarRespostas() {
+      const formData = new FormData(form);
+      let acertos = 0;
+
+      perguntas.forEach((pergunta, index) => {
+        if (parseInt(formData.get(`q${index}`)) === pergunta.correta) {
+          acertos++;
+        }
+      });
+
+      const resultado = document.getElementById('resultado');
+      resultado.innerText = `Você acertou ${acertos} de ${perguntas.length} questões.`;
+      resultado.style.color = acertos >= 7 ? 'green' : 'red';
+    }
+  </script>
+</body>
+</html>
