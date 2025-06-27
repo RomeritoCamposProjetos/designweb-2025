@@ -8,3 +8,4 @@ Nesta página, estão os materiais referentes ao 1° Bimestre do ano letivo.
 - [Aula 02 - Funcionamento da Internet/Web](../slides/01/01.pdf)
 - [Aula 03 - Flexbox e Responsividade]()
     - [Exercício](./exercicio1.html)
+- [Aula 04 - Javascript]()

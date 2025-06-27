@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    display: flex;
+    height: 100px;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px 40px;
+}
+
+.navbar > a {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 22px;
+    flex: 0 0 120px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.main { 
+    display: flex;
+    flex-flow: row wrap;
+    flex: 1 0 100%;
+    padding: 20px 40px;
+    gap: 10px;
+    border-top: 1px solid;
+}
+
+.card {
+    flex: 1 1 300px;
+    height: 300px;  
+    padding: 10px 5px;  
+    box-shadow: 4px 4px 2px 0px rgba(0,0,0,0.15);
+}
+
+.card > h2 {
+    border-bottom: 1px solid black;
+}
+
+.card > p {
+    text-align: justify;
+}
+
+
+/* media blocks */
+/* 
+Este blocos permitem capturar características como o tipo de media
+Assim os estilos definidos nas regras neste bloco serão aplicados
+quando o modo de impressão for selecionado.
+
+Neste caso, diferentemente do exemplo 02, os estilos anteriores continuam valendo e
+sendo aplicados.
+POr exemplo, ao selecionar o modo de impressão você verá que os cards tem sombras.
+*/
+@media print {
+    .navbar {
+        display: none;
+    }
+    
+    .card {
+        width: 100%;
+        border: 1px solid black;
+        margin: 10px 0px;
+    }
+    
+    .card > p {
+        text-align: justify;
+    }
+
+    .main {
+        flex-direction: column;
+    }
+}
