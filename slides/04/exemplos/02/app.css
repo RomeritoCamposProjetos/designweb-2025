@@ -1,0 +1,2 @@
+@import url('./styles-print.css') print;
+@import url('./styles-screen.css') screen;
