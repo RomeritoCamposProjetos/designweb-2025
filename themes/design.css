@@ -108,6 +108,16 @@ div.wrapper {
     flex-flow: column nowrap;
     gap: 0;
     align-items: center;
+    width: 100%;
+    max-width: 100%;
+}
+
+pre {
+    width: 100%;
+}
+
+code {
+    background-color: rgb(255, 220, 226);
 }
 
 div.wrapper p {

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex-Grow</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .container {
+            border: 1px solid black;
+            width: 60%;
+            margin: 0 auto;
+            height: 400px;
+        }
+        .caixa1, .caixa2, .caixa3 {
+            border: 1px dashed darkblue;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .caixa1 {
+            flex-grow: 1;
+        }
+
+        .caixa2 {
+            flex-grow: 2;
+        }
+
+        .caixa3 {
+            flex-grow: 3;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="caixa1">
+            Fator: 1
+        </div>
+        <div class="caixa2">
+            Fator: 2
+        </div>
+
+        <div class="caixa3">
+            Fator: 3
+        </div>
+    </div>
+
+
+    
+</body>
+</html>
