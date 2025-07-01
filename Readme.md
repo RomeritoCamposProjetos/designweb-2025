@@ -17,7 +17,7 @@ Alternativamente, estimulo o uso dos servidores embarcados da linguagem python (
 
 ## Projetos
 
-- [Projeto 1](./projetos/)
+- [Projeto 1](./projetos/projeto1.md)
 
 ## Horários
 
