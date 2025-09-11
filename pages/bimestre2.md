@@ -1,6 +1,6 @@
 # Design Web - Bimestre 2
 
-Nesta página, estão os materiais referentes ao 1° Bimestre do ano letivo.
+Nesta página, estão os materiais referentes ao 2° Bimestre do ano letivo.
 
 ## Slides
 
