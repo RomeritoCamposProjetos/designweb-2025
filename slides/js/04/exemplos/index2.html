@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Conversor de Temperatura</title>
+</head>
+<body>
+  <h1>Conversor de Temperatura</h1>
+
+  <input type="text" id="entrada" placeholder="Digite a temperatura">
+  <select id="tipo">
+    <option value="C">Celsius → Fahrenheit</option>
+    <option value="F">Fahrenheit → Celsius</option>
+  </select>
+  <button id="converterBtn">Converter</button>
+
+  <p id="resultado"></p>
+
+  <script>
+    // Seleção de elementos (objetos DOM)
+    const entrada = document.getElementById("entrada");
+    const tipo = document.getElementById("tipo");
+    const botao = document.getElementById("converterBtn");
+    const resultado = document.getElementById("resultado");
+
+    botao.addEventListener("click", () => {
+      const valorTexto = entrada.value;       // string
+      const tipoSelecionado = tipo.value;     // string
+
+      // Conversão explícita de string para number
+      const valorNumero = Number(valorTexto); // number
+
+      // Verifica se o valor é um número válido (booleano)
+      if (isNaN(valorNumero)) {
+        resultado.textContent = "Por favor, digite um número válido!";
+        resultado.style.color = "red";
+        return; // undefined
+      }
+
+      // Objeto para armazenar o resultado
+      let conversao = { celsius: null, fahrenheit: null }; // null inicial
+
+      if (tipoSelecionado === "C") {
+        conversao.celsius = valorNumero; // número primitivo
+        conversao.fahrenheit = (valorNumero * 9/5) + 32; // número primitivo - float point        
+      } else {
+        conversao.fahrenheit = valorNumero;
+        conversao.celsius = (valorNumero - 32) * 5/9;
+      }
+
+      // Atualiza DOM com template literal (string + number)
+      resultado.textContent = `Celsius: ${conversao.celsius.toFixed(2)}, Fahrenheit: ${conversao.fahrenheit.toFixed(2)}`;
+      resultado.style.color = "green";
+    });
+  </script>
+</body>
+</html>

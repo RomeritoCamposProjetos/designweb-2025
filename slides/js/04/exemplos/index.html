@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Exemplo DOM e Tipos</title>
+</head>
+<body>
+  <h1>Lista de Tarefas</h1>
+
+  <input type="text" id="novaTarefa" placeholder="Digite uma tarefa">
+  <button id="adicionarBtn">Adicionar</button>
+
+  <ul id="listaTarefas"></ul>
+
+  <script>
+    // Selecionando elementos do DOM
+    const input = document.getElementById("novaTarefa"); // objeto
+    const botao = document.getElementById("adicionarBtn"); // objeto
+    const lista = document.getElementById("listaTarefas"); // objeto
+
+    // Array para armazenar tarefas (objeto mutável)
+    let tarefas = [];
+
+    // Função para renderizar tarefas
+    function renderizar() {
+      // Limpa a lista
+      lista.innerHTML = "";
+
+      tarefas.forEach((tarefaObj, index) => {
+        // Criando elementos do DOM
+        const li = document.createElement("li"); // objeto
+        li.textContent = `${index + 1}. ${tarefaObj.texto}`; // string + número
+        li.style.color = tarefaObj.concluida ? "green" : "black"; // booleano
+
+        // Evento para marcar como concluída
+        li.addEventListener("click", () => {
+          tarefaObj.concluida = !tarefaObj.concluida; // mutação do objeto
+          renderizar();
+        });
+
+        lista.appendChild(li); // adiciona elemento ao DOM
+      });
+    }
+
+    // Evento do botão
+    botao.addEventListener("click", () => {
+      const texto = input.value; // string
+      if (texto.trim() === "") {
+        alert("Digite uma tarefa!"); // string
+        return; // undefined
+      }
+
+      // Adiciona tarefa (objeto) ao array
+      tarefas.push({ texto: texto, concluida: false }); // booleano
+      input.value = ""; // string
+      renderizar();
+    });
+
+    renderizar();
+  </script>
+</body>
+</html>
