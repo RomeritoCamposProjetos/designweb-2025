@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;    
+}
+
+body > h1 {
+    text-align: center;
+    margin: 20px;
+    font-size: 3em;
+}
+
+.tipo-objeto {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+ form {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+    font-size: 1.5em;
+}
+
+ form select{
+    padding: 10px 10px;
+    font-size: 1em;
+    border-radius: 5px;
+}
+
+ form button {
+    padding: 5px 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 66, 0);
+    outline: none;
+    background-color: rgb(41, 255, 41);
+}
+
+.criar-objeto form {
+    display: none;
+}
