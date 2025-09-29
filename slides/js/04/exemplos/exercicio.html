@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="exercicio.css">
+
+</head>
+<body>
+
+    <h1>Pratica - Criação de Objetos</h1>
+
+    <div class="tipo-objeto" id="modo_criacao">
+        <form method="POST">
+            <label for="tipo">Escolha o modo de criaçãos</label>
+            <select name="tipo" id="tipo">
+                <option value="">--Escolha uma opção--</option>
+                <option value="literal"><pre>let a = {a:10}</pre></option>
+                <option value="create"><pre>let a = Object.create(null)</pre></option>
+                <option value="new"><pre>let a = new Pessoa(nome)</pre></option>
+            </select>
+            <button id="botao_create">Enviar</button>
+        </form>
+    </div>
+
+    <div class="criar-objeto" id="div_criar">
+        <form method="POST">
+            <h2>Adicione uma propriedade ao seu objeto</h2>
+
+        </form>
+    </div>
+
+
+    <script src="./exercicio.js"></script>
+    
+    
+</body>
+</html>
