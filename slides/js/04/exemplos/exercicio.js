@@ -18,6 +18,6 @@ bt_create.addEventListener('click', (event)=>{
     form.style.display = 'none'    
     
     const form2 =document.getElementById('div_criar')
-    form2.display = 'flex'
+    form2.style.display = 'flex'
 
 })
