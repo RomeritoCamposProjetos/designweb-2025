@@ -71,5 +71,17 @@ body > h1 {
     justify-self: center;
     padding: 10px;
     font-size: 1em;
+}
 
+input {
+    flex: 1;    
+    padding: 10px;
+    font-size: 1em;
+}
+
+#div_object {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
 }

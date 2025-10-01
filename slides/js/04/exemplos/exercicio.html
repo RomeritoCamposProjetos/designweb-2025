@@ -13,7 +13,7 @@
     <h1>Pratica - Criação de Objetos</h1>
 
     <div class="tipo-objeto" id="modo_criacao">
-        <form method="POST">
+        <form>
             <label for="tipo">Escolha o modo de criação</label>
             <select name="tipo" id="tipo">
                 <option value="">--Escolha uma opção--</option>
@@ -26,19 +26,28 @@
     </div>
 
     <div class="criar-objeto" id="div_criar">
-        <form method="POST">
+        <form>
             <h2>Adicione uma propriedade ao seu objeto</h2>
             <div class="group">
-                <label for="prop">Nome da propriedade: </label>
-                <input type="text" name="nome">
+                <label for="propriedade">Nome da propriedade: </label>
+                <input type="text" name="propriedade">
             </div>            
-            <select name="prop" id="prop">
+            <select name="type" id="type">
                 <option value="number">Number</option>
                 <option value="boolean">Boolean</option>
                 <option value="string">String</option>
             </select>
+            <input type="text" name="prop_value" placeholder="Valor" id="prop_value">
             <button id="adicionar">Adicionar</button>
         </form>
+    </div>
+
+    <div id="div_object">
+
+    </div>
+
+    <div id="formated_object">
+        
     </div>
 
 
