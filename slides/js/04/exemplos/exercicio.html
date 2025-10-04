@@ -14,7 +14,7 @@
 
     <div class="tipo-objeto" id="modo_criacao">
         <form method="POST">
-            <label for="tipo">Escolha o modo de criaçãos</label>
+            <label for="tipo">Escolha o modo de criação</label>
             <select name="tipo" id="tipo">
                 <option value="">--Escolha uma opção--</option>
                 <option value="literal"><pre>let a = {a:10}</pre></option>
@@ -28,7 +28,16 @@
     <div class="criar-objeto" id="div_criar">
         <form method="POST">
             <h2>Adicione uma propriedade ao seu objeto</h2>
-
+            <div class="group">
+                <label for="prop">Nome da propriedade: </label>
+                <input type="text" name="nome">
+            </div>            
+            <select name="prop" id="prop">
+                <option value="number">Number</option>
+                <option value="boolean">Boolean</option>
+                <option value="string">String</option>
+            </select>
+            <button id="adicionar">Adicionar</button>
         </form>
     </div>
 
